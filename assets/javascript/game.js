@@ -13,7 +13,7 @@ var amyt = $("#amethyst");
 var rubyValue;
 var emValue;
 var sapValue;
-var amethyst;
+var amytValue;
 
 // creat variable for computer guess to be input too
 var compChoice;
@@ -47,21 +47,23 @@ function gameInit () {
      
     amytValue = parseInt(Math.random() * (12 - 1) + 1);
      console.log("amythest value " + amytValue);
-};
 
-console.log("number to guess out of function: " + compChoice);
+     console.log("number to guess: " + compChoice);
+};
 
 function gameLoop () {
     $(ruby).on("click", function() {
         currentTotal = currentTotal + rubyValue;
         $("#total-guess").text(currentTotal);
         console.log("current player total: " + currentTotal);
+        Eval ();
     })
 
     $(emr).on("click", function() {
         currentTotal = currentTotal + emValue;
         $("#total-guess").text(currentTotal);
         console.log("current player total: " + currentTotal);
+        Eval ();
     })
 
 
@@ -69,37 +71,45 @@ function gameLoop () {
         currentTotal = currentTotal + sapValue;
         $("#total-guess").text(currentTotal);
         console.log("current player total: " + currentTotal);
+        Eval ();
     })
 
     $(amyt).on("click", function() {
         currentTotal = currentTotal + amytValue;
         $("#total-guess").text(currentTotal);
         console.log("current player total: " + currentTotal);
+        Eval ()
     })
-        console.log("current player total outside function: " + currentTotal);
-
-        if (currentTotal === compChoice) {
-            alert ("You Win!");
-            winCount++;
-            $("#player-wins").text("winCount");
-            gameOver = true;
-        }
-        if (currentTotal > compChoice) {
-            alert ("You Lose!");
-            lossCount++;
-            $("#player-losses").text(lossCount);
-            gameOver = true;
-        }
-    
+     
 };
 
+function Eval () {
+    if (currentTotal === compChoice) {
+        alert ("You Win!");
+        winCount++;
+        $("#player-wins").text(winCount);
+        gameOver = true;
+    }
+    if (compChoice < currentTotal) {
+        alert ("You Lose!");
+        lossCount++;
+        $("#player-losses").text(lossCount);
+        gameOver = true;
+    }
+
+    if (gameOver === true) {
+        gameReset ();
+       }
+};
+
+function gameReset () {
+    gameInit();
+    currentTotal = 0
+    currentScore.text(currentTotal);
+    $("#computer-guess").text("number to guess: " + compChoice);
+    gameLoop();
+};
 
 gameInit();
 gameLoop();
-
-if (gameOver === true) {
- function gameReset () {
-  
- };
-}
 
