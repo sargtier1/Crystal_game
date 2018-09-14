@@ -54,14 +54,14 @@ function gameInit () {
 function gameLoop () {
     $(ruby).on("click", function() {
         currentTotal = currentTotal + rubyValue;
-        $("#total-guess").text(currentTotal);
+        $("#total-guess").text("current player total: " + currentTotal);
         console.log("current player total: " + currentTotal);
         Eval ();
     })
 
     $(emr).on("click", function() {
         currentTotal = currentTotal + emValue;
-        $("#total-guess").text(currentTotal);
+        $("#total-guess").text("current player total: " + currentTotal);
         console.log("current player total: " + currentTotal);
         Eval ();
     })
@@ -69,14 +69,14 @@ function gameLoop () {
 
     $(sap).on("click", function() {
         currentTotal = currentTotal + sapValue;
-        $("#total-guess").text(currentTotal);
+        $("#total-guess").text("current player total: " + currentTotal);
         console.log("current player total: " + currentTotal);
         Eval ();
     })
 
     $(amyt).on("click", function() {
         currentTotal = currentTotal + amytValue;
-        $("#total-guess").text(currentTotal);
+        $("#total-guess").text("current player total: " + currentTotal);
         console.log("current player total: " + currentTotal);
         Eval ()
     })
@@ -103,6 +103,7 @@ function Eval () {
 };
 
 function gameReset () {
+    gameOver = false;
     gameInit();
     currentTotal = 0
     currentScore.text(currentTotal);
