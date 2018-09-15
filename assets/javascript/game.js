@@ -19,8 +19,9 @@ var amytValue;
 var compChoice;
 
 //create variable to store the players total from gem presses
-var currentTotal;
+var currentTotal = 0;
 var currentScore = $("#total-guess");
+   
 
 // game loops (to be called upon later)
 //
@@ -28,7 +29,12 @@ var currentScore = $("#total-guess");
 function gameInit () {
     //clears game board
     currentTotal = 0;
-    currentScore.text(currentTotal);
+    rubyValue = 0;
+    emValue = 0;
+    sapValue = 0;
+    amytValue= 0;
+
+    currentScore.text("current player total: " + currentTotal);
 
     // Generates a random number to guess, rounds it to the nearest Int, and then displays it on the page
     compChoice = parseInt(Math.random() * (120 - 12) + 12);
@@ -51,16 +57,18 @@ function gameInit () {
      console.log("number to guess: " + compChoice);
 };
 
+
 function gameLoop () {
+    
     $(ruby).on("click", function() {
-        currentTotal = currentTotal + rubyValue;
+        currentTotal += rubyValue;
         $("#total-guess").text("current player total: " + currentTotal);
         console.log("current player total: " + currentTotal);
         Eval ();
     })
 
     $(emr).on("click", function() {
-        currentTotal = currentTotal + emValue;
+        currentTotal += emValue;
         $("#total-guess").text("current player total: " + currentTotal);
         console.log("current player total: " + currentTotal);
         Eval ();
@@ -68,19 +76,18 @@ function gameLoop () {
 
 
     $(sap).on("click", function() {
-        currentTotal = currentTotal + sapValue;
+        currentTotal += sapValue;
         $("#total-guess").text("current player total: " + currentTotal);
         console.log("current player total: " + currentTotal);
         Eval ();
     })
 
     $(amyt).on("click", function() {
-        currentTotal = currentTotal + amytValue;
+        currentTotal += amytValue;
         $("#total-guess").text("current player total: " + currentTotal);
         console.log("current player total: " + currentTotal);
         Eval ()
     })
-     
 };
 
 function Eval () {
@@ -88,12 +95,14 @@ function Eval () {
         alert ("You Win!");
         winCount++;
         $("#player-wins").text(winCount);
+        currentTotal = 0;
         gameOver = true;
     }
     if (compChoice < currentTotal) {
         alert ("You Lose!");
         lossCount++;
         $("#player-losses").text(lossCount);
+        currentTotal = 0;
         gameOver = true;
     }
 
@@ -102,13 +111,11 @@ function Eval () {
        }
 };
 
+
 function gameReset () {
+    console.log("New Game");
     gameOver = false;
     gameInit();
-    currentTotal = 0
-    currentScore.text(currentTotal);
-    $("#computer-guess").text("number to guess: " + compChoice);
-    gameLoop();
 };
 
 gameInit();
